@@ -1,0 +1,160 @@
+# **Exhaustive Tutorial: Debugging Python Programs in Visual Studio Code**
+
+## **Table of Contents**
+1. [Introduction to Debugging in VS Code](#introduction-to-debugging-in-vs-code)  
+2. [Setting Up Python Debugging in VS Code](#setting-up-python-debugging-in-vs-code)  
+   - [Prerequisites](#prerequisites)  
+   - [Installing Python and VS Code Extensions](#installing-python-and-vs-code-extensions)  
+3. [Configuring the Debugger](#configuring-the-debugger)  
+   - [Launch Configuration](#launch-configuration)  
+   - [Debugging Modes](#debugging-modes)  
+4. [Basic Debugging Techniques](#basic-debugging-techniques)  
+   - [Setting Breakpoints](#setting-breakpoints)  
+   - [Starting a Debug Session](#starting-a-debug-session)  
+   - [Stepping Through Code](#stepping-through-code)  
+5. [Advanced Debugging Features](#advanced-debugging-features)  
+   - [Watch Variables](#watch-variables)  
+   - [Call Stack Inspection](#call-stack-inspection)  
+   - [Conditional Breakpoints](#conditional-breakpoints)  
+   - [Logpoints](#logpoints)  
+6. [Debugging Different Scenarios](#debugging-different-scenarios)  
+   - [Debugging Scripts](#debugging-scripts)  
+   - [Debugging Modules](#debugging-modules)  
+   - [Remote Debugging](#remote-debugging)  
+7. [Troubleshooting Common Debugging Issues](#troubleshooting-common-debugging-issues)  
+8. [Conclusion](#conclusion)  
+
+---
+
+## **1. Introduction to Debugging in VS Code**
+Debugging is an essential skill for developers, allowing you to inspect code execution, identify bugs, and verify logic. Visual Studio Code (VS Code) provides a powerful, integrated debugging environment for Python with features like breakpoints, variable inspection, and step execution.
+
+This tutorial will guide you through setting up and using the VS Code debugger effectively for Python programs.
+
+---
+
+## **2. Setting Up Python Debugging in VS Code**
+
+### **Prerequisites**
+- **Python installed** (3.6 or later recommended)  
+- **VS Code installed** (Latest version)  
+- **Python Extension for VS Code** (From Microsoft)  
+
+### **Installing Python and VS Code Extensions**
+1. **Install Python**: Download from [python.org](https://www.python.org/downloads/).  
+2. **Install VS Code**: Download from [code.visualstudio.com](https://code.visualstudio.com/).  
+3. **Install Python Extension**:  
+   - Open VS Code.  
+   - Go to **Extensions (Ctrl+Shift+X)**.  
+   - Search for **"Python"** by Microsoft and install it.  
+
+![Python Extension Installation](https://i.imgur.com/JQhG9Yl.png)  
+
+---
+
+## **3. Configuring the Debugger**
+
+### **Launch Configuration**
+VS Code uses a `launch.json` file to define debug configurations.  
+
+1. Open your Python project in VS Code.  
+2. Click on the **Run and Debug (Ctrl+Shift+D)** icon in the Activity Bar.  
+3. Click **"Create a launch.json file"** and select **Python**.  
+
+![Create launch.json](https://i.imgur.com/5rWvV7u.png)  
+
+A sample `launch.json` will be generated:  
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}
+```
+
+### **Debugging Modes**
+- **Launch**: Starts the Python script in debug mode.  
+- **Attach**: Attaches to an already-running Python process.  
+
+---
+
+## **4. Basic Debugging Techniques**
+
+### **Setting Breakpoints**
+Click on the left gutter next to a line number to set a breakpoint (red dot).  
+
+![Setting Breakpoints](https://i.imgur.com/8zYQJhV.png)  
+
+### **Starting a Debug Session**
+1. Press **F5** or click the **green play button** in the Debug view.  
+2. The debugger will pause at breakpoints.  
+
+### **Stepping Through Code**
+Use the debug toolbar to:  
+- **Continue (F5)**: Resume execution.  
+- **Step Over (F10)**: Execute the next line without entering functions.  
+- **Step Into (F11)**: Enter a function call.  
+- **Step Out (Shift+F11)**: Exit the current function.  
+
+![Debug Toolbar](https://i.imgur.com/9JvWt4k.png)  
+
+---
+
+## **5. Advanced Debugging Features**
+
+### **Watch Variables**
+Add variables to the **Watch** section to monitor their values dynamically.  
+
+![Watch Variables](https://i.imgur.com/7Q0Xx5C.png)  
+
+### **Call Stack Inspection**
+View the call hierarchy in the **Call Stack** section.  
+
+### **Conditional Breakpoints**
+Right-click a breakpoint → **Edit Breakpoint** → Set a condition (e.g., `x > 10`).  
+
+### **Logpoints**
+A non-breaking breakpoint that logs a message:  
+Right-click → **Add Logpoint** → Enter message (e.g., `"Value of x is {x}"`).  
+
+---
+
+## **6. Debugging Different Scenarios**
+
+### **Debugging Scripts**
+- Open the script → Set breakpoints → Start debugging (F5).  
+
+### **Debugging Modules**
+Use `"module": "module_name"` in `launch.json` instead of `"program"`.  
+
+### **Remote Debugging**
+Use `"host": "localhost"` and `"port": 5678` in `launch.json`.  
+Run the remote script with:  
+```bash
+python -m debugpy --listen 5678 --wait-for-client script.py
+```
+
+---
+
+## **7. Troubleshooting Common Debugging Issues**
+- **Debugger not stopping at breakpoints?**  
+  - Ensure the correct Python environment is selected (bottom-left corner).  
+- **Module not found?**  
+  - Check `PYTHONPATH` or use `"cwd": "${workspaceFolder}"` in `launch.json`.  
+
+---
+
+## **8. Conclusion**
+VS Code provides a robust debugging environment for Python. Mastering breakpoints, stepping, and variable inspection will significantly improve your debugging efficiency.  
+
+For further learning, explore:  
+- [VS Code Debugging Docs](https://code.visualstudio.com/docs/python/debugging)  
+- [Python Debugging Techniques](https://realpython.com/python-debugging-pdb/)  
